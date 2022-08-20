@@ -10,24 +10,31 @@ const router = express.Router();
 
 // Routes
 router.post(
-	'/product/new',
+	'/admin/product/new',
 	isAuthenticatedUser,
 	authorizeRoles('admin'),
 	productController.createProduct
 );
 router.put(
-	'/product/:id',
+	'/admin/product/:id',
 	isAuthenticatedUser,
 	authorizeRoles('admin'),
 	productController.updateProduct
 );
 router.delete(
-	'/product/:id',
+	'/admin/product/:id',
 	isAuthenticatedUser,
 	authorizeRoles('admin'),
 	productController.deleteProduct
 );
+router.put(
+	'/review',
+	isAuthenticatedUser,
+	productController.createProductReview
+);
 router.get('/products', productController.getAllProducts);
+router.get('/reviews', productController.getProductReviews);
 router.get('/product/:id', productController.getProductDetails);
+router.delete('/reviews', isAuthenticatedUser, productController.deleteReview);
 
 module.exports = router;
